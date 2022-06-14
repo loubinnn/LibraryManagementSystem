@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
-
+// <cmt no 1 />
 namespace LibraryWeb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
