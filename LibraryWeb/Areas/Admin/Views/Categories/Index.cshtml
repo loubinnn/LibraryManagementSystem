@@ -1,0 +1,55 @@
+﻿@model IEnumerable<LibraryWeb.Models.Category>
+
+@{
+    ViewData["Title"] = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Books" asp-action="Index">Book</a>
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Categories" asp-action="Index">Category</a>
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Authors" asp-action="Index">Author</a>
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Publishers" asp-action="Index">Publisher</a>
+</nav>
+<h1>Category Edit</h1>
+@using (Html.BeginForm("Index", "Categories", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <input placeholder="Input" class=" input-validation-error form-control text-box single-line" id="Keyword" name="Keyword" style="max-width:100%;" type="text" value="@ViewBag.Keyword" />
+            <button type="submit" style="max-width:100%;width:100%;" class="btn-btn-primary">
+                Search
+            </button>
+        </div>
+    </div>
+}
+   Total Record Found: @Model.Count()
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Category1">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Category1">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Category1">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<LibraryWeb.Models.Book>
+
+@{
+    ViewData["Title"] = "Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Books" asp-action="Index">Book</a>
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Categories" asp-action="Index">Category</a>
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Authors" asp-action="Index">Author</a>
+        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Publishers" asp-action="Index">Publisher</a>
+</nav>
+<h1>Book Edit</h1>
+@using (Html.BeginForm("Index", "Books", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <input placeholder="Input" class=" input-validation-error form-control text-box single-line" id="Keyword" name="Keyword" style="max-width:100%;" type="text" value="@ViewBag.Keyword" />
+            <button type="submit" style="max-width:100%;width:100%;" class="btn-btn-primary">
+                Search
+            </button>
+        </div>
+    </div>
+}
+   Total Record Found: @Model.Count()
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublishDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfpage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pubisher)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublishDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfpage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.AuthorId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryNavigation.Category1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pubisher.PublisherId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BookId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.BookId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<LibraryWeb.Models.LendingTicket>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lending Ticket Edit</h1>
+@using (Html.BeginForm("Index", "Publishers", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <input placeholder="Input" class=" input-validation-error form-control text-box single-line" id="Keyword" name="Keyword" style="max-width:100%;" type="text" value="@ViewBag.Keyword" />
+            <button type="submit" style="max-width:100%;width:100%;" class="btn-btn-primary">
+                Search
+            </button>
+        </div>
+    </div>
+}
+   Total Record Found: @Model.Count()
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BorrowedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Student)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BorrowedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.BookId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusNavigation.Status1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.StudentId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.LendingTicketId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.LendingTicketId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.LendingTicketId">Return</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
